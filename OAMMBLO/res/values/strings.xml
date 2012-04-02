@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">OAMMBLO</string>
-
+	<string name="welcome_text">Welcome to OAMMBLO app</string>
+	<string name="user_name_text">Username</string>
+	<string name="password_text">Password</string>
 </resources>
