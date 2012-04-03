@@ -2,45 +2,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_blue" >
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="127dp"
-        android:gravity="center"
-        android:text="@string/user_name_text"
-        android:textColor="#fff"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:text="@string/password_text"
-        android:textColor="#fff"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:ems="10" />
+    android:background="@color/app_white" >
 
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/username"
-        android:layout_below="@+id/textView2"
-        android:ems="10" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="@string/password_text"
+        android:textSize="18sp"
+        android:textStyle="bold" >
+       
+    </EditText>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_marginBottom="38dp"
+        android:ems="10"
+        android:hint="@string/user_name_text"
+        android:textSize="18sp"
+        android:textStyle="bold">
+        <requestFocus /> 
+     </EditText>>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="75sp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/password"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="25dp"
+        android:text="@string/login_text" 
+        android:onClick="openDashboard"/>
 
 </RelativeLayout>

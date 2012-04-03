@@ -4,6 +4,7 @@ import com.fr4gus.android.oammblo.R;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 
 /**
@@ -16,7 +17,11 @@ public class LoginActivity extends OammbloActivity{
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
-        Intent finishIntent = new Intent(LoginActivity.this, SplashActivity.class);        
+        setContentView(R.layout.login);                                      
     }
+	
+	public void openDashboard(View view){
+		Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+        startActivity(intent);
+	}
 }

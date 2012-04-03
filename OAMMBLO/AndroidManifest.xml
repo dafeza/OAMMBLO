@@ -20,7 +20,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.LoginActivity">            
+            android:name=".ui.LoginActivity"
+            android:noHistory="true">
+                        
+        </activity>
+        
+        <activity
+            android:name=".ui.DashboardActivity">            
         </activity>
     </application>
 

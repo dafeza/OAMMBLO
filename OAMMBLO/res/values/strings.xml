@@ -5,4 +5,10 @@
 	<string name="welcome_text">Welcome to OAMMBLO app</string>
 	<string name="user_name_text">Username</string>
 	<string name="password_text">Password</string>
+	<string name="login_text">Login</string>
+	<string name="tweets_text">Tweets</string>
+	<string name="mentions_text">Mentions</string>
+	<string name="retweets_text">ReTweets</string>
+	<string name="lists_text">Lists</string>
+	<string name="compose_text">Compose</string>
 </resources>
