@@ -11,4 +11,5 @@
 	<string name="retweets_text">ReTweets</string>
 	<string name="lists_text">Lists</string>
 	<string name="compose_text">Compose</string>
+	<string name="authentication_failed_text">Authenticate error</string>
 </resources>

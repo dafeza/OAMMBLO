@@ -39,6 +39,6 @@
         android:layout_below="@+id/password"
         android:layout_marginTop="25dp"
         android:text="@string/login_text" 
-        android:onClick="openDashboard"/>
+        android:onClick="authenticate"/>
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.fr4gus.android.oammblo.data;
 
+import java.util.Date;
 import java.util.List;
 
 import oauth.signpost.OAuth;
@@ -23,9 +24,9 @@ public class Twitter4JService implements TwitterService {
 
     public static final String STORE_SECRET_TOKEN = "secret-token";
 
-    public static final String CONSUMER_KEY = "SU CONSUMER KEY AQUI";
+    public static final String CONSUMER_KEY = "hSlpz8s82fzUDJtoDZVf0Q";
 
-    public static final String CONSUMER_SECRET_KEY = "SU CONSUMER SECRET KEY AQUI";
+    public static final String CONSUMER_SECRET_KEY = "Kj03Hb00YwwzMlEycU2p49mWrcDhSTXK1lGoFavPo";
 
     public static final String OAUTH_CALLBACK_SCHEME = "x-oauth-twitter";
 
@@ -64,7 +65,8 @@ public class Twitter4JService implements TwitterService {
 
             provider = new CommonsHttpOAuthProvider("https://api.twitter.com/oauth/request_token",
                     "https://api.twitter.com/oauth/access_token", "https://api.twitter.com/oauth/authorize");
-            String oauthUrl = provider.retrieveRequestToken(consumer, OAUTH_CALLBACK_URL);
+            Date now = new Date();
+            String oauthUrl = provider.retrieveRequestToken(consumer, OAUTH_CALLBACK_URL);            
             Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(oauthUrl));
             ctx.startActivity(myIntent);
         } catch (Exception e) {
