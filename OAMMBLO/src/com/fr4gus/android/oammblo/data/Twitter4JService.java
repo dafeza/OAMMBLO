@@ -1,13 +1,21 @@
 package com.fr4gus.android.oammblo.data;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import oauth.signpost.OAuth;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
+
+import twitter4j.ResponseList;
+import twitter4j.Status;
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
+import twitter4j.conf.ConfigurationBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,16 +52,43 @@ public class Twitter4JService implements TwitterService {
     @Override
     public List<Tweet> getTimeline() {
         // TODO Auto-generated method stub
-        return null;
+    	try {
+    		ConfigurationBuilder conf = new ConfigurationBuilder();
+    		conf.setOAuthAccessToken(accessToken.getToken());
+    		conf.setOAuthConsumerKey(CONSUMER_KEY);
+    		conf.setOAuthConsumerSecret(CONSUMER_SECRET_KEY);
+    		conf.setOAuthAccessTokenSecret(accessToken.getTokenSecret());
+    		//TwitterFactory twitterFactory = new TwitterFactory(conf.build());
+    		
+    		twitter = new TwitterFactory().getInstance();
+    		twitter.setOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET_KEY);
+    		twitter.setOAuthAccessToken(accessToken);
+    	ResponseList<Status> timeline = twitter.getHomeTimeline();
+			List<Tweet> tweetTimeline = new LinkedList<Tweet>();
+			// Recorre la lista de status del timeline y crea una lista de Tweet.
+			for(Iterator<Status> i = timeline.iterator(); i.hasNext();) {
+				Status status = i.next();
+				tweetTimeline.add(new Tweet(status.getCreatedAt().getTime(), status.getUser().getScreenName(), status.getText()));
+			}
+			return tweetTimeline;
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			return null;
+		}    	
+    	
     }
 
     @Override
     public boolean checkForSavedLogin(Context ctx) {
         SharedPreferences prefs = ctx.getSharedPreferences(STORE_KEY, Context.MODE_PRIVATE);
         String token = prefs.getString(STORE_TOKEN, null);
-        String secret = prefs.getString(STORE_SECRET_TOKEN, null);
+        String secret = prefs.getString(STORE_SECRET_TOKEN, null);        
         if (token != null && secret != null) {
-            accessToken = new AccessToken(token, secret);
+            accessToken = new AccessToken(token, secret);            
         }
         return accessToken != null;
     }
@@ -82,12 +117,12 @@ public class Twitter4JService implements TwitterService {
             LogIt.d(this, "verifier: " + verifier);
         }
         try {
-            if (accessToken == null) {
-                provider.retrieveAccessToken(consumer, verifier);
-                accessToken = new AccessToken(consumer.getToken(), consumer.getConsumerSecret());
+            
+            provider.retrieveAccessToken(consumer, verifier);
+            accessToken = new AccessToken(consumer.getToken(), consumer.getTokenSecret());
 
-                saveSession(context);
-            }
+            saveSession(context);
+            
             return true;
         } catch (Exception e) {
             e.printStackTrace();

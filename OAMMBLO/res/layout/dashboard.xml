@@ -15,7 +15,8 @@
 	        android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 	        android:layout_alignParentLeft="true"	        	        
-	        android:src="@drawable/ic_oammblo" />
+	        android:src="@drawable/ic_oammblo"
+	        android:onClick="openTimeline" />
          
           <TextView
         android:id="@+id/textView1"

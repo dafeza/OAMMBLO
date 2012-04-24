@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+
+    <TextView
+        android:id="@+id/tweet_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Lorem Ipsume" />
+
+    <TextView
+        android:id="@+id/tweet_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tweet_message"
+        android:text="TweeterUser123" />
+
+    <TextView
+        android:id="@+id/tweet_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tweet_author"
+        android:layout_alignBottom="@+id/tweet_author"
+        android:layout_alignParentRight="true"
+        android:text="04/04/2012" />
+    
+</RelativeLayout>

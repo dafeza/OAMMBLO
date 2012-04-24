@@ -32,6 +32,10 @@
         <activity
             android:name=".ui.DashboardActivity">            
         </activity>
+        
+        <activity
+            android:name=".ui.TimelineActivity">            
+        </activity>
     </application>
 
 </manifest>
