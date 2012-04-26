@@ -1,125 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/db1_root"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_blue" >
-
-    <RelativeLayout
-        android:id="@+id/dashboard_top_bar"
+    android:background="@color/app_white">
+    <LinearLayout style="@style/TitleBar">        
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/about_text"
+            android:src="@drawable/title_search_alt"
+            android:onClick="onClickSearch" />
+	</LinearLayout>
+	<LinearLayout
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:padding="6dip">
+	    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="120dp"        
-        android:background="@color/app_blue" >
-
-         <ImageButton
-	        android:id="@+id/dashboard_timeline"
-	        android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-	        android:layout_alignParentLeft="true"	        	        
-	        android:src="@drawable/ic_oammblo"
-	        android:onClick="openTimeline" />
-         
-          <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dashboard_timeline"
-        android:layout_alignParentLeft="true"
-        android:text="@string/tweets_text" />
-         <ImageButton
-	        android:id="@+id/dashboard_lists"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"	        
-	        android:layout_alignParentRight="true"	        
-	        android:src="@drawable/ic_list" />
-         
-         <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        
-        android:layout_below="@+id/dashboard_lists"
-        android:layout_alignParentRight="true"
-        android:text="@string/lists_text" />
-        
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/dashboard_middle_bar"        
-        android:layout_width="fill_parent"        
-        android:layout_height="120dp"
-        android:layout_below="@+id/dashboard_top_bar"
-        android:layout_centerInParent="true"
-        android:background="@color/app_blue" >
-    
-    	<ImageButton
-	        android:id="@+id/dash_board_compose"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentRight="true"       
-	        android:src="@drawable/ic_compose" />
-    	
-    	<TextView
-        android:id="@+id/TextView04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        
-        android:layout_below="@+id/dash_board_compose"
-        android:layout_alignParentRight="true"
-        android:text="@string/compose_text" />
-    </RelativeLayout>
-   
-	 <RelativeLayout
-        android:id="@+id/dashboard_bottom_bar"        
-        android:layout_width="fill_parent"        
-        android:layout_height="120dp"
-        android:layout_below="@+id/dashboard_middle_bar"
-        android:background="@color/app_blue" >
-    	
-	     <ImageButton
-        android:id="@+id/dashboard_retweets"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_retweet"
-         />
-	     
-	    <TextView
-        android:id="@+id/TextView03"
-       android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        
-        android:layout_below="@+id/dashboard_retweets"
-        android:layout_alignParentRight="true"
-        android:text="@string/retweets_text" />
-	     
-	     <ImageButton
-        android:id="@+id/dashboard_mentions"
-        android:layout_width="wrap_content"
+        android:layout_weight="1">
+	    	<Button android:id="@+id/home_btn_feature1"
+	            style="@style/HomeButton"	            
+	            android:text="@string/tweets_text"
+	            android:drawableTop="@drawable/button1_default"
+	            android:onClick="openTimeline" />
+	    	<Button android:id="@+id/home_btn_feature2"
+	            style="@style/HomeButton"	            
+	            android:text="@string/mentions_text"
+	            android:drawableTop="@drawable/button2_default"/>
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:padding="6dip">
+	    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"        
-        android:src="@drawable/ic_mentions" />
-	     
-	    <TextView
-        android:id="@+id/TextView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dashboard_mentions"
-        android:layout_alignParentLeft="true"
-        android:text="@string/mentions_text" />
-   	</RelativeLayout>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-   
-
-</RelativeLayout>
+        android:layout_weight="1">
+	    	<Button android:id="@+id/home_btn_feature3"
+	            style="@style/HomeButton"	            
+	            android:text="@string/compose_text"
+	            android:drawableTop="@drawable/button3_default"/>
+	    	<Button android:id="@+id/home_btn_feature4"
+	            style="@style/HomeButton"	            
+	            android:text="@string/lists_text"
+	            android:drawableTop="@drawable/button4_default"/>
+		</LinearLayout>
+	</LinearLayout>		
+</LinearLayout>

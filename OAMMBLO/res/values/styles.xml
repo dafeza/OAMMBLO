@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TitleBar">
+        <item name="android:background">@color/app_blue</item>
+        <item name="android:id">@+id/title_container</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">45dip</item>
+        <item name="android:orientation">horizontal</item>        
+    </style>
+    <style name="TitleBarAction"> 
+        <item name="android:layout_width">45dip</item> 
+        <item name="android:layout_height">fill_parent</item> 		
+ 		<item name="android:background">@color/app_blue</item> 		
+ 	</style>
+    <style name="HomeButton">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@color/app_white</item>
+    </style>
+</resources>

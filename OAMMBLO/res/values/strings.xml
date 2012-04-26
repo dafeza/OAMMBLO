@@ -12,4 +12,5 @@
 	<string name="lists_text">Lists</string>
 	<string name="compose_text">Compose</string>
 	<string name="authentication_failed_text">Authenticate error</string>
+	<string name="about_text">About</string>
 </resources>
