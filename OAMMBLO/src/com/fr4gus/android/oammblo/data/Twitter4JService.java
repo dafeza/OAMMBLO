@@ -53,12 +53,6 @@ public class Twitter4JService implements TwitterService {
     public List<Tweet> getTimeline() {
         // TODO Auto-generated method stub
     	try {
-    		ConfigurationBuilder conf = new ConfigurationBuilder();
-    		conf.setOAuthAccessToken(accessToken.getToken());
-    		conf.setOAuthConsumerKey(CONSUMER_KEY);
-    		conf.setOAuthConsumerSecret(CONSUMER_SECRET_KEY);
-    		conf.setOAuthAccessTokenSecret(accessToken.getTokenSecret());
-    		//TwitterFactory twitterFactory = new TwitterFactory(conf.build());
     		
     		twitter = new TwitterFactory().getInstance();
     		twitter.setOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET_KEY);
