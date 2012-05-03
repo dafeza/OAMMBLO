@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.fr4gus.android.oammblo.R;
 import com.fr4gus.android.oammblo.bo.Tweet;
 import com.fr4gus.android.oammblo.data.DummyTwitterService;
 import com.fr4gus.android.oammblo.data.TwitterService;
+import com.fr4gus.android.oammblo.util.IOManager;
 import com.fr4gus.android.oammblo.util.LogIt;
 
 public class TimelineActivity extends OammbloActivity {
@@ -74,7 +76,7 @@ public class TimelineActivity extends OammbloActivity {
                 holder.message = (TextView) convertView.findViewById(R.id.tweet_message);
                 holder.author = (TextView) convertView.findViewById(R.id.tweet_author);
                 holder.timestamp = (TextView) convertView.findViewById(R.id.tweet_timestamp);
-                
+                holder.profileImage = (ImageView) convertView.findViewById(R.id.tweet_profile_image);
                 convertView.setTag(holder);
             } else {
                 holder = (TweetViewHolder) convertView.getTag();
@@ -86,6 +88,7 @@ public class TimelineActivity extends OammbloActivity {
             holder.message.setText( tweet.getMessage());
             holder.author.setText(tweet.getAuthor());
             holder.timestamp.setText( (new Date(tweet.getTimestamp())).toString());
+            holder.profileImage.setImageBitmap(IOManager.getBitmapFromURL(tweet.getUrl()));
             return convertView;
         }
 
@@ -94,7 +97,8 @@ public class TimelineActivity extends OammbloActivity {
     private class TweetViewHolder {
         TextView message;
         TextView author;
-        TextView timestamp;        
+        TextView timestamp;
+        ImageView profileImage;
     }
 
 }

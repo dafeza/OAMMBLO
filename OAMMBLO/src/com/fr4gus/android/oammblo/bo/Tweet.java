@@ -1,5 +1,7 @@
 package com.fr4gus.android.oammblo.bo;
 
+import java.net.URL;
+
 public class Tweet {
 
     private long timestamp;
@@ -7,12 +9,15 @@ public class Tweet {
     private String author;
 
     private String message;
+    
+    private URL url;
 
     
-    public Tweet(long timestamp, String author, String message){
+    public Tweet(long timestamp, String author, String message, URL url){
         this.timestamp = timestamp;
         this.author = author;
         this.message = message;
+        this.url = url;
     }
     
     public long getTimestamp() {
@@ -38,6 +43,14 @@ public class Tweet {
     public void setMessage(String message) {
         this.message = message;
     }
+
+	public URL getUrl() {
+		return url;
+	}
+
+	public void setUrl(URL url) {
+		this.url = url;
+	}
     
     
 }

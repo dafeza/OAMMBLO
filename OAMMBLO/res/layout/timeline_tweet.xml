@@ -29,5 +29,13 @@
         android:layout_alignBottom="@+id/tweet_author"
         android:layout_alignParentRight="true"
         android:text="04/04/2012" />
+   	<ImageView 
+   	    android:id="@+id/tweet_profile_image"
+   	    android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tweet_author"
+        android:src="@drawable/ic_twitts"
+   	  />
+   	       	
     
 </RelativeLayout>

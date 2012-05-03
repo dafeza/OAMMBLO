@@ -1,5 +1,7 @@
 package com.fr4gus.android.oammblo.data;
 
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -14,6 +16,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.conf.ConfigurationBuilder;
 import android.content.Context;
@@ -52,28 +55,24 @@ public class Twitter4JService implements TwitterService {
     @Override
     public List<Tweet> getTimeline() {
         // TODO Auto-generated method stub
-    	try {
-    		
-    		twitter = new TwitterFactory().getInstance();
-    		twitter.setOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET_KEY);
-    		twitter.setOAuthAccessToken(accessToken);
-    	ResponseList<Status> timeline = twitter.getHomeTimeline();
-			List<Tweet> tweetTimeline = new LinkedList<Tweet>();
+	    		
+		twitter = new TwitterFactory().getInstance();
+		twitter.setOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET_KEY);
+		twitter.setOAuthAccessToken(accessToken);
+		List<Tweet> tweets = new ArrayList<Tweet>();
+		try{
+    		List<Status> timeline = twitter.getHomeTimeline();
+			
+			
 			// Recorre la lista de status del timeline y crea una lista de Tweet.
-			for(Iterator<Status> i = timeline.iterator(); i.hasNext();) {
-				Status status = i.next();
-				tweetTimeline.add(new Tweet(status.getCreatedAt().getTime(), status.getUser().getScreenName(), status.getText()));
+			for(Status status : timeline) {
+				Tweet newTweet = new Tweet(status.getCreatedAt().getTime(), status.getUser().getScreenName(), status.getText(), status.getUser().getProfileImageURL());					
+				tweets.add(newTweet);
 			}
-			return tweetTimeline;
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		} catch (Exception e2) {
-			e2.printStackTrace();
-			return null;
-		}    	
-    	
+		} catch (Exception e) {
+			LogIt.d(this, e, e.getMessage());
+		}
+		return tweets;		    	
     }
 
     @Override
