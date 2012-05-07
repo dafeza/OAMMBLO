@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,31 +19,48 @@ import com.fr4gus.android.oammblo.R;
 import com.fr4gus.android.oammblo.bo.Tweet;
 import com.fr4gus.android.oammblo.data.DummyTwitterService;
 import com.fr4gus.android.oammblo.data.TwitterService;
+import com.fr4gus.android.oammblo.util.BackgroundTask;
 import com.fr4gus.android.oammblo.util.IOManager;
 import com.fr4gus.android.oammblo.util.LogIt;
 
 public class TimelineActivity extends OammbloActivity {
     private ListView mTimeline;
     private TwitterService twitterService;
-    
+    TweetViewHolder holder = null;
+    Tweet tweet = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timeline);
-
-        mTimeline = (ListView) findViewById(R.id.timeline_list);
-
-        twitterService =  OammbloApp.getInstance().getTwitterService();
         
-        List<Tweet> timeline = twitterService.getTimeline();
-        if (timeline == null) {
-        	LogIt.d(this, "Solicitando autenticacion...");
-            twitterService.requestOAuthAccessToken(this);
-        }else {
-        	mTimeline.setAdapter(new TweetAdapter(timeline));
-        }
+        
+        mTimeline = (ListView) findViewById(R.id.timeline_list);
+        
+        
+        new BackgroundTask() {
+        	List<Tweet> tweets;
+        	
+        	
+			@Override
+			public void work() {
+				TwitterService service = OammbloApp.getInstance().getTwitterService();
+                tweets = service.getTimeline();			
+			}
+			
+			@Override
+			public void error(Throwable error) {
+				toast("Unable to retrieve tweets");
+				
+			}
+			
+			@Override
+			public void done() {
+				mTimeline.setAdapter(new TweetAdapter(tweets));				
+			}
+		};
 
     }
+        
 
     private class TweetAdapter extends BaseAdapter {
         List<Tweet> tweets;
@@ -50,6 +68,7 @@ public class TimelineActivity extends OammbloActivity {
         public TweetAdapter(List<Tweet> timeline) {
             tweets = timeline;
         }
+              
 
         @Override
         public int getCount() {
@@ -68,7 +87,7 @@ public class TimelineActivity extends OammbloActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            TweetViewHolder holder = null;
+            
             LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if ( convertView == null) {
                 convertView = inflater.inflate(R.layout.timeline_tweet, null);
@@ -83,12 +102,31 @@ public class TimelineActivity extends OammbloActivity {
                                 
             }
             
-            Tweet tweet = tweets.get(position);
+            tweet = tweets.get(position);
             
             holder.message.setText( tweet.getMessage());
             holder.author.setText(tweet.getAuthor());
             holder.timestamp.setText( (new Date(tweet.getTimestamp())).toString());
-            holder.profileImage.setImageBitmap(IOManager.getBitmapFromURL(tweet.getUrl()));
+            new BackgroundTask() {
+				
+				@Override
+				public void work() {
+					holder.profileImage.setImageBitmap(IOManager.getBitmapFromURL(tweet.getUrl()));
+					
+				}
+				
+				@Override
+				public void error(Throwable error) {
+					// TODO Auto-generated method stub					
+				}
+				
+				@Override
+				public void done() {
+					// TODO Auto-generated method stub
+					
+				}
+			};
+            
             return convertView;
         }
 
@@ -100,5 +138,6 @@ public class TimelineActivity extends OammbloActivity {
         TextView timestamp;
         ImageView profileImage;
     }
+      
 
 }
