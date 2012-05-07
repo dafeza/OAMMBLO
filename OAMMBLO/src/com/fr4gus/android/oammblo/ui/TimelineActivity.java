@@ -21,11 +21,13 @@ import com.fr4gus.android.oammblo.data.DummyTwitterService;
 import com.fr4gus.android.oammblo.data.TwitterService;
 import com.fr4gus.android.oammblo.util.BackgroundTask;
 import com.fr4gus.android.oammblo.util.IOManager;
+import com.fr4gus.android.oammblo.util.ImageDownloader;
 import com.fr4gus.android.oammblo.util.LogIt;
 
 public class TimelineActivity extends OammbloActivity {
     private ListView mTimeline;
     private TwitterService twitterService;
+    private ImageDownloader imageDownloader;
     TweetViewHolder holder = null;
     Tweet tweet = null;
     @Override
@@ -33,7 +35,7 @@ public class TimelineActivity extends OammbloActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timeline);
         
-        
+        imageDownloader = OammbloApp.getInstance().getImageDownloader();
         mTimeline = (ListView) findViewById(R.id.timeline_list);
         
         
@@ -43,7 +45,7 @@ public class TimelineActivity extends OammbloActivity {
         	
 			@Override
 			public void work() {
-				TwitterService service = OammbloApp.getInstance().getTwitterService();
+				TwitterService service = OammbloApp.getInstance().getTwitterService();				
                 tweets = service.getTimeline();			
 			}
 			
@@ -107,25 +109,11 @@ public class TimelineActivity extends OammbloActivity {
             holder.message.setText( tweet.getMessage());
             holder.author.setText(tweet.getAuthor());
             holder.timestamp.setText( (new Date(tweet.getTimestamp())).toString());
-            new BackgroundTask() {
-				
-				@Override
-				public void work() {
-					holder.profileImage.setImageBitmap(IOManager.getBitmapFromURL(tweet.getUrl()));
-					
-				}
-				
-				@Override
-				public void error(Throwable error) {
-					// TODO Auto-generated method stub					
-				}
-				
-				@Override
-				public void done() {
-					// TODO Auto-generated method stub
-					
-				}
-			};
+            try {
+            	imageDownloader.download(tweet.getUrl().toURI().toString(), holder.profileImage);
+            } catch (Exception e) {
+            
+            }
             
             return convertView;
         }
